@@ -124,7 +124,7 @@ public class Server {
             e1.printStackTrace();
         }
 
-        if (message.getMode().contentEquals("load")) {
+        if (message.getMode().contentEquals("Load")) {
             pool.execute(player2);
             //GoGame goGame = this.saveGame(message);
             //goGame = this.goGameService.getGame();

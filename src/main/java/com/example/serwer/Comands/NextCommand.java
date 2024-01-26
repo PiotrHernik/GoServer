@@ -8,9 +8,10 @@ import com.example.serwer.MariaDb.Movement;
 import com.example.serwer.MessagefromServer.EndGame;
 import com.example.serwer.MessagefromServer.MoveInfo;
 import com.example.serwer.MessagefromServer.OpponentPass;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-
+@Component
 public class NextCommand extends Command {
 
     @Override
