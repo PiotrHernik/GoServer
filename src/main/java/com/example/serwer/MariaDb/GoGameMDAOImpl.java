@@ -40,6 +40,9 @@ public class GoGameMDAOImpl implements GoGameMDAO
         for (int i = 0; i < idList.size(); i++) {
             ids[i] = idList.get(i);
         }
+        for (int i : ids){
+            System.out.println(i);
+        }
         return ids;
     }
 

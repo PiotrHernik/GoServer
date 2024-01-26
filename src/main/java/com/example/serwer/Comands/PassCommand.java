@@ -16,7 +16,7 @@ import java.io.IOException;
 @Component
 public class PassCommand extends Command
 {
-    //@Autowired
+    @Autowired
     protected MovementService movementService;
     @Override
     public void executeCommand(Game game, GamePlayer player, GoGameMD goGameMD)
