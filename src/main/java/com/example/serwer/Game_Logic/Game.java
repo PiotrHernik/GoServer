@@ -1,18 +1,20 @@
 package com.example.serwer.Game_Logic;
 
 import com.example.serwer.ClientMessages.Server_ClientMessage;
+import com.example.serwer.Comands.ChoseCommand;
 import com.example.serwer.Comands.Command;
 import com.example.serwer.Comands.CommandFactory;
 import com.example.serwer.GamePlayer.GamePlayer;
 import com.example.serwer.MariaDb.GoGameMD;
 import com.example.serwer.MariaDb.Movement;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 
 @Component
 public class Game
 {
-
+    @Autowired
     CommandFactory commandFactory;
 
     private GamePlayer player1;
@@ -28,11 +30,11 @@ public class Game
     public Game() {
         this.previousPass = false;
         this.movementsIndex = 0;
+        this.commandFactory = new ChoseCommand();
     }
 
     public synchronized void getMessage(Server_ClientMessage clientMessage, GamePlayer player) {
-        Command command = this.commandFactory.getCommand(
-                clientMessage);
+        Command command = this.commandFactory.getCommand(clientMessage);
         if (command != null)
             command.executeCommand(this, player, goGame);
     }

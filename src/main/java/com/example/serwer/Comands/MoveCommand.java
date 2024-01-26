@@ -16,7 +16,7 @@ import java.io.IOException;
 public class MoveCommand extends Command
 {
 
-
+    @Autowired
     protected MovementService movementService;
     public MoveCommand (){}
 
