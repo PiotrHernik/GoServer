@@ -101,7 +101,7 @@ public class Server {
                 e.printStackTrace();
             }
 
-        } else if (message.getMode().contentEquals("load")) {
+        } else if (message.getMode().contentEquals("Load")) {
 
             ifHotseat = true;
             player2 = new RealPlayer(connection, 2);

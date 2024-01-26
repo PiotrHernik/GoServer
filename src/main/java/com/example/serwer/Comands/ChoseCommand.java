@@ -30,7 +30,8 @@ public class ChoseCommand implements CommandFactory
         } else if (message instanceof Next)
         {
             NextCommand nextCommand = applicationContext.getBean(NextCommand.class);
-            return null;
+            nextCommand.setClientMessage(message);
+            return nextCommand;
 
         }
         return null;

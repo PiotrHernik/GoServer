@@ -30,7 +30,7 @@ public class MoveCommand extends Command
 
         if (game.getGameLogic().move(message.getX(), message.getY(), game.getActualPlayer().getNumber())) {
             try {
-                Movement movement = new Movement("move", message.getX(), message.getY(), game.getActualPlayer().getNumber(), goGameMD);
+                Movement movement = new Movement("move", message.getX(), message.getY(), goGameMD.getId(), goGameMD);
                 this.movementService.saveMovement(movement);
 
                 int[][] emptyPlaces = game.getGameLogic().removeDeathStones(message.getX(), message.getY());

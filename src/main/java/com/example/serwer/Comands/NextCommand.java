@@ -15,6 +15,7 @@ public class NextCommand extends Command {
 
     @Override
     public void executeCommand(Game game, GamePlayer player, GoGameMD goGame) {
+        System.out.println("Jestem w execute NextCommand");
 
         Movement movement = game.getMovements()[game.getMovementsIndex()];
         game.setMovementsIndex(game.getMovementsIndex() + 1);
