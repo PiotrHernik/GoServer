@@ -17,7 +17,7 @@ public class Game_Rules
 
 
     public boolean move(int x, int y, int player) {
-        if (this.checkMove(x, y, player)) {
+        if (this.validateMove(x, y, player)) {
             this.board[x][y] = player;
             return true;
         }
@@ -26,7 +26,7 @@ public class Game_Rules
     }
 
 
-    public boolean checkMove(int x, int y, int player) {
+    public boolean validateMove(int x, int y, int player) {
         if (this.board[x][y] != 0)
             return false;
 
@@ -73,7 +73,7 @@ public class Game_Rules
                 System.out.println("Empty PLaes :  " + emptyPlaces[i][j]);
             }
         }
-        if (emptyPlaces != null && emptyPlaces.length == 1) {
+        if (emptyPlaces.length == 1) {
             this.koX = emptyPlaces[0][0];
             this.koY = emptyPlaces[0][1];
         } else {
@@ -144,10 +144,7 @@ public class Game_Rules
             return true;
         if (y + 1 < this.size && this.board[x][y + 1] == player && this.checkBreath(x, y + 1, player))
             return true;
-        if (y - 1 >= 0 && this.board[x][y - 1] == player && this.checkBreath(x, y - 1, player))
-            return true;
-
-        return false;
+        return y - 1 >= 0 && this.board[x][y - 1] == player && this.checkBreath(x, y - 1, player);
     }
 
     private boolean checkEmptyPlace(int x, int y) {
@@ -157,10 +154,7 @@ public class Game_Rules
             return true;
         if (y + 1 < this.size && this.board[x][y + 1] == 0)
             return true;
-        if (y - 1 >= 0 && this.board[x][y - 1] == 0)
-            return true;
-
-        return false;
+        return y - 1 >= 0 && this.board[x][y - 1] == 0;
     }
 
     private void cleanBoardAfterChecking(int x, int y,int actualValue, int startValue, int otherValue) {
@@ -302,9 +296,6 @@ public class Game_Rules
             return true;
         if (y + 1 < this.size && this.board[x][y + 1] == opponent)
             return true;
-        if (y - 1 >= 0 && this.board[x][y - 1] == opponent)
-            return true;
-
-        return false;
+        return y - 1 >= 0 && this.board[x][y - 1] == opponent;
     }
 }

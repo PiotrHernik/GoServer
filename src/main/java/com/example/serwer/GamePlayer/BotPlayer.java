@@ -37,7 +37,7 @@ public class BotPlayer extends GamePlayer
 
         for (int i = 0; i < this.boardSize && !foundMove; i++) {
             for (int j = 0; j < this.boardSize && !foundMove; j++) {
-                if (this.game.getGameLogic().checkMove(i, j, 2) && this.checkOpponentAdjacent(i, j)) {
+                if (this.game.getGameLogic().validateMove(i, j, 2) && this.checkOpponentAdjacent(i, j)) {
                     this.game.getMessage(new Move(i, j), this);
                     foundMove = true;
                 }
@@ -47,7 +47,7 @@ public class BotPlayer extends GamePlayer
         if (!foundMove) {
             for (int i = 0; i < this.boardSize && !foundMove; i++) {
                 for (int j = 0; j < this.boardSize && !foundMove; j++) {
-                    if (this.game.getGameLogic().checkMove(i, j, 2)) {
+                    if (this.game.getGameLogic().validateMove(i, j, 2)) {
                         this.game.getMessage(new Move(i, j), this);
                         foundMove = true;
                     }
