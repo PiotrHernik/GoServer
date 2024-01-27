@@ -1,5 +1,6 @@
 package com.example.serwer.Game_Logic;
 
+import com.example.serwer.ClientMessages.Move;
 import com.example.serwer.ClientMessages.Server_ClientMessage;
 import com.example.serwer.Comands.ChoseCommand;
 import com.example.serwer.Comands.Command;
@@ -102,20 +103,19 @@ public class Game
         this.game_rules = game_rules;
     }
 
-    public Movement[] getMovements() {
-        return movements;
-    }
-
     public void setMovements(Movement[] movements) {
         this.movements = movements;
     }
 
-    public int getMovementsIndex() {
-        return movementsIndex;
-    }
+    public Movement getNextMovement() {
+        Movement m = movements[movementsIndex];
 
-    public void setMovementsIndex(int movementsIndex) {
-        this.movementsIndex = movementsIndex;
+        if (movementsIndex + 1 < movements.length)
+        {
+            movementsIndex++;
+        }
+
+        return m;
     }
 
     public void setGoGame(GoGameMD goGame) {

@@ -24,7 +24,7 @@ public class SurrenderCommand extends Command {
     public void executeCommand(Game game, GamePlayer player, GoGameMD goGame) {
         game.getGameLogic().removeDeathStonesEndGame();
 
-        Movement movement = new Movement("surrender", -1, -1, game.getActualPlayer().getNumber(), goGame);
+        Movement movement = new Movement("surrender", -1, -1, goGame.getId(), goGame);
         this.movementService.saveMovement(movement);
 
         int player1Points = game.getGameLogic().countPoints(1) + game.getPlayer1().getNumberOfPoints();

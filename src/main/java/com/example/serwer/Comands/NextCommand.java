@@ -1,6 +1,7 @@
 package com.example.serwer.Comands;
 
 
+import com.example.serwer.ClientMessages.Move;
 import com.example.serwer.GamePlayer.GamePlayer;
 import com.example.serwer.Game_Logic.Game;
 import com.example.serwer.MariaDb.GoGameMD;
@@ -20,32 +21,34 @@ public class NextCommand extends Command {
     public void executeCommand(Game game, GamePlayer player, GoGameMD goGame) {
         System.out.println("Jestem w execute NextCommand");
 
-        Movement movement = game.getMovements()[game.getMovementsIndex()];
-        game.setMovementsIndex(game.getMovementsIndex() + 1);
+        Movement movement = game.getNextMovement();
+
         System.out.println("Tralalaa");
         if (movement.getType().contentEquals("move")) {
-System.out.println("Rararar");
-            int[][] emptyPlaces = game.getGameLogic().removeDeathStones(movement.getX(), movement.getY());
-            System.out.println("Siemanko ");
-            for (int i = 0; i < emptyPlaces.length; i++ )
-            {
-                for (int j = 0; j < emptyPlaces[i].length; j++ )
-                {
-                    System.out.println("Empty PLaes :  " + emptyPlaces[i][j]);
-                }
-            }
-            game.getActualPlayer().addPoints(emptyPlaces.length);
-            System.out.println("Trerereraaa");
-            MoveInfo moveInfo = new MoveInfo(game.getActualPlayer().getNumber(), true,
-                    movement.getX(), movement.getY(), emptyPlaces);
+            if (!game.getActualPlayer().equals(player) && !game.isHotseat())
+                return;
 
-            try {
-                game.getActualPlayer().sendMessage(moveInfo);
-                game.changeActualPlayer();
-                game.getActualPlayer().sendMessage(moveInfo);
-                game.setPreviousPass(false);
-            } catch (IOException e) {
-                e.printStackTrace();
+            if (game.getGameLogic().move(movement.getX(), movement.getY(), game.getActualPlayer().getNumber())) {
+                try {
+//                    Movement movement = new Movement("move", message.getX(), message.getY(), goGame.getId(), goGame);
+//                    this.movementService.saveMovement(movement);
+
+                    int[][] emptyPlaces = game.getGameLogic().removeDeathStones(movement.getX(), movement.getY());
+                    game.getActualPlayer().addPoints(emptyPlaces.length);
+                    MoveInfo moveInfo = new MoveInfo(game.getActualPlayer().getNumber(), true, movement.getX(), movement.getY(), emptyPlaces);
+                    game.getActualPlayer().sendMessage(moveInfo);
+                    game.changeActualPlayer();
+                    game.getActualPlayer().sendMessage(moveInfo);
+                    game.setPreviousPass(false);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                try {
+                    game.getActualPlayer().sendMessage(new MoveInfo(0, false, 0, 0, null));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
 
         } else if (movement.getType().contentEquals("pass")) {

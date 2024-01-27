@@ -25,7 +25,7 @@ public class PassCommand extends Command
             return;
         }
 
-        Movement movement = new Movement("pass", -1, -1, game.getActualPlayer().getNumber(), goGameMD);
+        Movement movement = new Movement("pass", -1, -1, goGameMD.getId(), goGameMD);
         this.movementService.saveMovement(movement);
 
         if (game.isPreviousPass()) {
