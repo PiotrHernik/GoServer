@@ -158,7 +158,7 @@ public class Game_Rules
 
         for (int i = 0; i < this.size; i++)
             for (int j = 0; j < this.size; j++)
-                if (this.board[i][j] == 0 && !checkTerritory(i, j, opponent))
+                if (this.board[i][j] == 0 && checkTerritory(i, j, opponent))
                     this.cleanBoardAfterChecking(i, j, -1, 0, 0);
 
         for (int i = 0; i < this.size; i++)
@@ -320,21 +320,18 @@ public class Game_Rules
 
     private boolean checkTerritory(int x, int y, int opponent) {
         this.board[x][y] = -1;
-        boolean answer = true;
+        boolean answer = !this.checkOpponent(x, y, opponent);
 
-        if (this.checkOpponent(x, y, opponent))
+        if (x + 1 < this.size && this.board[x + 1][y] == 0 && this.checkTerritory(x + 1, y, opponent))
             answer = false;
-
-        if (x + 1 < this.size && this.board[x + 1][y] == 0 && !this.checkTerritory(x + 1, y, opponent))
+        if (x - 1 >= 0 && this.board[x - 1][y] == 0 && this.checkTerritory(x - 1, y, opponent))
             answer = false;
-        if (x - 1 >= 0 && this.board[x - 1][y] == 0 && !this.checkTerritory(x - 1, y, opponent))
+        if (y + 1 < this.size && this.board[x][y + 1] == 0 && this.checkTerritory(x, y + 1, opponent))
             answer = false;
-        if (y + 1 < this.size && this.board[x][y + 1] == 0 && !this.checkTerritory(x, y + 1, opponent))
-            answer = false;
-        if (y - 1 >= 0 && this.board[x][y - 1] == 0 && !this.checkTerritory(x, y - 1, opponent))
+        if (y - 1 >= 0 && this.board[x][y - 1] == 0 && this.checkTerritory(x, y - 1, opponent))
             answer = false;
 
-        return answer;
+        return !answer;
     }
 
     private boolean checkOpponent(int x, int y, int opponent) {

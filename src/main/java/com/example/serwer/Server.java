@@ -68,7 +68,7 @@ public class Server {
         SetOptions message = (SetOptions) connection.getMessage();
         boardSize = message.getSize();
 
-        if (message.getMode().contentEquals("hotseat")) {
+        if (message.getMode().equalsIgnoreCase("hotseat")) {
 
             ifHotseat = true;
             player2 = new RealPlayer(connection, 2);
@@ -79,7 +79,7 @@ public class Server {
                 e.printStackTrace();
             }
 
-        } else if (message.getMode().contentEquals("singleplayer")) {
+        } else if (message.getMode().equalsIgnoreCase("singleplayer")) {
 
             player2 = new BotPlayer(2, boardSize);
 
@@ -89,7 +89,7 @@ public class Server {
                 e.printStackTrace();
             }
 
-        } else if (message.getMode().contentEquals("multiplayer")) {
+        } else if (message.getMode().equalsIgnoreCase("multiplayer")) {
 
             ServerConnection connection2 = new ServerConnection(listener);
             player2 = new RealPlayer(connection2, 2);
@@ -101,7 +101,7 @@ public class Server {
                 e.printStackTrace();
             }
 
-        } else if (message.getMode().contentEquals("Load")) {
+        } else if (message.getMode().equalsIgnoreCase("Load")) {
 
             ifHotseat = true;
             player2 = new RealPlayer(connection, 2);
@@ -125,7 +125,7 @@ public class Server {
             e1.printStackTrace();
         }
 
-        if (message.getMode().contentEquals("Load")) {
+        if (message.getMode().equalsIgnoreCase("Load")) {
             pool.execute(player2);
             //GoGame goGame = this.saveGame(message);
             //goGame = this.goGameService.getGame();
