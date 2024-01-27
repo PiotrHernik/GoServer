@@ -11,6 +11,8 @@ import com.example.serwer.MessagefromServer.OpponentPass;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.sql.SQLOutput;
+
 @Component
 public class NextCommand extends Command {
 
@@ -20,12 +22,20 @@ public class NextCommand extends Command {
 
         Movement movement = game.getMovements()[game.getMovementsIndex()];
         game.setMovementsIndex(game.getMovementsIndex() + 1);
-
+        System.out.println("Tralalaa");
         if (movement.getType().contentEquals("move")) {
-
+System.out.println("Rararar");
             int[][] emptyPlaces = game.getGameLogic().removeDeathStones(movement.getX(), movement.getY());
+            System.out.println("Siemanko ");
+            for (int i = 0; i < emptyPlaces.length; i++ )
+            {
+                for (int j = 0; j < emptyPlaces[i].length; j++ )
+                {
+                    System.out.println("Empty PLaes :  " + emptyPlaces[i][j]);
+                }
+            }
             game.getActualPlayer().addPoints(emptyPlaces.length);
-
+            System.out.println("Trerereraaa");
             MoveInfo moveInfo = new MoveInfo(game.getActualPlayer().getNumber(), true,
                     movement.getX(), movement.getY(), emptyPlaces);
 

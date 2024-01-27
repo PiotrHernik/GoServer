@@ -75,7 +75,9 @@ public class Game_Rules
      * @param y
      * @return table with all death stones coordinates
      */
-    public int[][] removeDeathStones(int x, int y) { //x, y - new stone's coordinate
+    public int[][] removeDeathStones(int x, int y) {
+
+        System.out.println("Jestesmy w deathstones    " + x + "    " + y);//x, y - new stone's coordinate
         int deathStoneNumber = ((this.board[x][y] == 1) ? 2 : 1);
 
         if (x + 1 < this.size && this.board[x + 1][y] == deathStoneNumber && this.checkBreath(x + 1, y, deathStoneNumber))
@@ -91,7 +93,13 @@ public class Game_Rules
             this.cleanBoardAfterChecking(x, y - 1, -1, deathStoneNumber, deathStoneNumber);
 
         int[][] emptyPlaces = this.getEmptyPlaces();
-
+        for (int i = 0; i < emptyPlaces.length; i++ )
+        {
+            for (int j = 0; j < emptyPlaces[i].length; j++ )
+            {
+                System.out.println("Empty PLaes :  " + emptyPlaces[i][j]);
+            }
+        }
         if (emptyPlaces != null && emptyPlaces.length == 1) {
             this.koX = emptyPlaces[0][0];
             this.koY = emptyPlaces[0][1];

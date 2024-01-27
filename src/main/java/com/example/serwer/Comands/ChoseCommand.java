@@ -29,9 +29,8 @@ public class ChoseCommand implements CommandFactory
             return passCommand;
         } else if (message instanceof Next)
         {
-            NextCommand nextCommand = applicationContext.getBean(NextCommand.class);
-            nextCommand.setClientMessage(message);
-            return nextCommand;
+
+            return new NextCommand();
 
         }
         return null;

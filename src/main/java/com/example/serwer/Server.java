@@ -110,6 +110,7 @@ public class Server {
             try {
                 player1.sendMessage(new SentGameOptions(1,
                         this.goGameService.getGameById(gameId).getSize(), message.getMode()));
+                boardSize = this.goGameService.getGameById(gameId).getSize();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -137,6 +138,7 @@ public class Server {
             game.setMovements(this.movementService.getMovementsById(gameId));
             player1.setGame(game);
             player2.setGame(game);
+
         } else {
             pool.execute(player2);
             GoGameMD goGame = this.saveGame(message);
