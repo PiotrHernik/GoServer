@@ -7,10 +7,7 @@ public class Game_Rules
     private int koX;
     private int koY;
 
-    /**
-     * Class constructor
-     * @param size of board
-     */
+
     public Game_Rules(int size) {
         this.board = new int[size][size];
         this.size = size;
@@ -18,14 +15,7 @@ public class Game_Rules
         this.koY = -1;
     }
 
-    /**
-     * Function checks, if player can move on position (x,y).
-     * If yes, put his stone in position (x,y), and now user have to run removeDeathStones function.
-     * @param x coordinate of new stone
-     * @param y coordinate of new stone
-     * @param player integer player's value
-     * @return true, if player has moved to (x,y), false otherwise
-     */
+
     public boolean move(int x, int y, int player) {
         if (this.checkMove(x, y, player)) {
             this.board[x][y] = player;
@@ -35,13 +25,7 @@ public class Game_Rules
         return false;
     }
 
-    /**
-     * Return true, if move is possible, false otherwise
-     * @param x coordinate
-     * @param y coordinate
-     * @param player integer player's value
-     * @return
-     */
+
     public boolean checkMove(int x, int y, int player) {
         if (this.board[x][y] != 0)
             return false;
@@ -64,17 +48,6 @@ public class Game_Rules
         return false;
     }
 
-    /**
-     * Function remove all death stones from the board.
-     * If only one stone was killed, function set ko parameters to death stone position,
-     * reset ko parameters to -1 otherwise.
-     * The return parameter is table with all death stones parameters
-     * Size of this table give information about number of killed stones.
-     * Client should change this positions to empty spaces.
-     * @param x
-     * @param y
-     * @return table with all death stones coordinates
-     */
     public int[][] removeDeathStones(int x, int y) {
 
         System.out.println("Jestesmy w deathstones    " + x + "    " + y);//x, y - new stone's coordinate
@@ -113,21 +86,13 @@ public class Game_Rules
         return emptyPlaces;
     }
 
-    /**
-     * Return board's value
-     * @param x coordinate
-     * @param y coordinate
-     * @return
-     */
     public int checkPlayer(int x, int y) {
         if (x < 0 || y < 0 || x >= this.size || y >= this.size)
             return -1;
         return this.board[x][y];
     }
 
-    /**
-     * Remove all death group at the end of the game
-     */
+
     public void removeDeathStonesEndGame() {
         for (int i = 0; i < this.size; i++)
             for (int j = 0; j < this.size; j++) {
@@ -146,11 +111,7 @@ public class Game_Rules
 
     }
 
-    /**
-     * Count points for one player
-     * @param player integer player's value
-     * @return points
-     */
+
     public int countPoints(int player) {
 
         int points = 0;
