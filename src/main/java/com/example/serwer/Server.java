@@ -54,7 +54,7 @@ public class Server {
         Movement[] movements = null;
 
         try {
-            listener = new ServerSocket(59898);
+            listener = new ServerSocket(59899);
             connection = new ServerConnection(listener);
             TimeUnit.SECONDS.sleep(1);
             connection.sendMessage(new NewGame(this.goGameService.getIdList()));
