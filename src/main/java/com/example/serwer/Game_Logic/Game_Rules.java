@@ -161,21 +161,21 @@ public class Game_Rules
     }
 
     private void cleanBoardAfterChecking(int x, int y,int actualValue, int startValue, int otherValue) {
-        this.cleanRecursion(x, y, actualValue, otherValue);
+        this.opponentStonesRecursionCheck(x, y, actualValue, otherValue);
         this.board[x][y] = startValue;
     }
 
-    private void cleanRecursion(int x, int y, int actualValue, int value) {
+    private void opponentStonesRecursionCheck(int x, int y, int actualValue, int value) {
         this.board[x][y] = value;
 
         if (x + 1 < this.size && this.board[x + 1][y] == actualValue)
-            this.cleanRecursion(x + 1, y, actualValue, value);
+            this.opponentStonesRecursionCheck(x + 1, y, actualValue, value);
         if (x - 1 >= 0 && this.board[x - 1][y] == actualValue)
-            this.cleanRecursion(x - 1, y, actualValue, value);
+            this.opponentStonesRecursionCheck(x - 1, y, actualValue, value);
         if (y + 1 < this.size && this.board[x][y + 1] == actualValue)
-            this.cleanRecursion(x, y + 1, actualValue, value);
+            this.opponentStonesRecursionCheck(x, y + 1, actualValue, value);
         if (y - 1 >= 0 && this.board[x][y - 1] == actualValue)
-            this.cleanRecursion(x, y - 1, actualValue, value);
+            this.opponentStonesRecursionCheck(x, y - 1, actualValue, value);
     }
 
     private boolean checkRemoveOtherStones(int x, int y, int player) {
