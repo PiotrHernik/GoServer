@@ -28,7 +28,13 @@ public class SurrenderCommand extends Command {
         this.movementService.saveMovement(movement);
 
         int player1Points = game.getGameLogic().countPoints(1) + game.getPlayer1().getNumberOfPoints();
+        if (player1Points >= (goGame.getSize() * goGame.getSize())){
+            player1Points -= (goGame.getSize() * goGame.getSize());
+        }
         int player2Points = game.getGameLogic().countPoints(2) + game.getPlayer2().getNumberOfPoints();
+        if (player2Points >= (goGame.getSize() * goGame.getSize())){
+            player2Points -= (goGame.getSize() * goGame.getSize());
+        }
 
         try {
             if (game.getPlayer1().equals(player)) {

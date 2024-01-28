@@ -32,7 +32,13 @@ public class PassCommand extends Command
             game.getGameLogic().removeDeathStonesEndGame();
 
             int player1Points = game.getGameLogic().countPoints(1) + game.getPlayer1().getNumberOfPoints();
+            if (player1Points >= (goGameMD.getSize() * goGameMD.getSize())){
+                player1Points -= (goGameMD.getSize() * goGameMD.getSize());
+            }
             int player2Points = game.getGameLogic().countPoints(2) + game.getPlayer2().getNumberOfPoints();
+            if (player2Points >= (goGameMD.getSize() * goGameMD.getSize())){
+                player2Points -= (goGameMD.getSize() * goGameMD.getSize());
+            }
 
             try {
                 game.getPlayer1().sendMessage( new EndGame(false, 0, player1Points, player2Points));
