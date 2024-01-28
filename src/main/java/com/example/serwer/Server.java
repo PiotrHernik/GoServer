@@ -58,62 +58,77 @@ public class Server {
             connection = new ServerConnection(listener);
             TimeUnit.SECONDS.sleep(1);
             connection.sendMessage(new NewGame(this.goGameService.getIdList()));
-
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
 
         player1 = new RealPlayer(connection, 1);
 
+        assert connection != null;
         SetOptions message = (SetOptions) connection.getMessage();
         boardSize = message.getSize();
 
-        if (message.getMode().equalsIgnoreCase("hotseat")) {
-
-            ifHotseat = true;
-            player2 = new RealPlayer(connection, 2);
-
-            try {
-                player1.sendMessage(new SentGameOptions(1, message.getSize(), message.getMode()));
-            } catch (IOException e) {
-                e.printStackTrace();
+        switch (message.getMode().toLowerCase())
+        {
+            case "hotseat" ->
+            {
+                ifHotseat = true;
+                player2 = new RealPlayer(connection, 2);
+                try
+                {
+                    player1.sendMessage(new SentGameOptions(1, message.getSize(), message.getMode()));
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+            case "singleplayer" ->
+            {
+                player2 = new BotPlayer(2, boardSize);
+                try
+                {
+                    player1.sendMessage(new SentGameOptions(1, message.getSize(), message.getMode()));
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+            case "multiplayer" ->
+            {
+                ServerConnection connection2 = new ServerConnection(listener);
+                player2 = new RealPlayer(connection2, 2);
+                try
+                {
+                    player1.sendMessage(new SentGameOptions(1, message.getSize(), message.getMode()));
+                    player2.sendMessage(new SentGameOptions(2, message.getSize(), message.getMode()));
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+            case "load" ->
+            {
+                ifHotseat = true;
+                player2 = new RealPlayer(connection, 2);
+                gameId = message.getGameId();
+                try
+                {
+                    player1.sendMessage(new SentGameOptions(1, this.goGameService.getGameById(gameId).getSize(), message.getMode()));
+                    boardSize = this.goGameService.getGameById(gameId).getSize();
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+            default ->
+            {
+                break;
             }
 
-        } else if (message.getMode().equalsIgnoreCase("singleplayer")) {
-
-            player2 = new BotPlayer(2, boardSize);
-
-            try {
-                player1.sendMessage(new SentGameOptions(1, message.getSize(), message.getMode()));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-        } else if (message.getMode().equalsIgnoreCase("multiplayer")) {
-
-            ServerConnection connection2 = new ServerConnection(listener);
-            player2 = new RealPlayer(connection2, 2);
-
-            try {
-                player1.sendMessage(new SentGameOptions(1, message.getSize(), message.getMode()));
-                player2.sendMessage(new SentGameOptions(2, message.getSize(), message.getMode()));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-        } else if (message.getMode().equalsIgnoreCase("Load")) {
-
-            ifHotseat = true;
-            player2 = new RealPlayer(connection, 2);
-            gameId = message.getGameId();
-
-            try {
-                player1.sendMessage(new SentGameOptions(1,
-                        this.goGameService.getGameById(gameId).getSize(), message.getMode()));
-                boardSize = this.goGameService.getGameById(gameId).getSize();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
 
         ExecutorService pool = Executors.newFixedThreadPool(20);
@@ -126,6 +141,7 @@ public class Server {
         }
 
         if (message.getMode().equalsIgnoreCase("Load")) {
+            assert player2 != null;
             pool.execute(player2);
             //GoGame goGame = this.saveGame(message);
             //goGame = this.goGameService.getGame();
@@ -140,6 +156,7 @@ public class Server {
             player2.setGame(game);
 
         } else {
+            assert player2 != null;
             pool.execute(player2);
             GoGameMD goGame = this.saveGame(message);
             goGame = this.goGameService.getGame();
