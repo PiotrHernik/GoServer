@@ -7,7 +7,7 @@ public class SetOptions implements Server_ClientMessage
     @Serial
     private static final long serialVersionUID = 1L;
     int size;
-    String mode; //hotSeat, Online, Multiplayer
+    String mode;
     int gameId;
 
     public SetOptions(int size, String mode, int gameId) {

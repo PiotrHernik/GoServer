@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 public class Game_Rules
 {
-    private int[][] board; // 0 - empty, 1 - first player, 2 - second player
+    private int[][] board;
     private int size;
     private int koX;
     private int koY;

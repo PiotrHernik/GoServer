@@ -16,19 +16,4 @@ public class EndGame implements Server_ServerMessage
         this.playerSurrender = playerSurrender;
     }
 
-    public boolean isSurrender() {
-        return this.surrender;
-    }
-
-    public int getplayer1Points() {
-        return player1Points;
-    }
-
-    public int getplayer2Points() {
-        return player2Points;
-    }
-
-    public int getPlayerSurrender() {
-        return playerSurrender;
-    }
 }

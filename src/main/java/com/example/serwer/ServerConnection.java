@@ -16,7 +16,7 @@ public class ServerConnection
     private ObjectInputStream inputStream;
 
 
-    public ServerConnection (ServerSocket serverSocket)
+    public ServerConnection(ServerSocket serverSocket)
     {
         try
         {
@@ -42,10 +42,10 @@ public class ServerConnection
         {
             System.out.println("Not found");
         }
-       return clientMessage;
+        return clientMessage;
     }
 
-    public void sendMessage (Server_ServerMessage message) throws IOException
+    public void sendMessage(Server_ServerMessage message) throws IOException
     {
         outputStream.writeObject(message);
         outputStream.flush();
@@ -54,22 +54,4 @@ public class ServerConnection
     }
 
 
-//    public void close()
-//    {
-//        ServerConnection serverConnection = null;
-//        ServerSocket socket = null;
-//        Server_ServerMessage message = null;
-//        try {
-//            socket = new ServerSocket(3311);
-//            serverConnection = new ServerConnection(socket);
-//            TimeUnit.SECONDS.sleep(1);
-//            serverConnection.sendMessage(new NewGame(null));
-//        } catch (IOException | InterruptedException e) {
-//            throw new RuntimeException(e);
-//        } finally {
-//            if (serverConnection != null) {
-//                serverConnection.close();
-//            }
-//        }
-//    }
 }

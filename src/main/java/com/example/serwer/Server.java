@@ -143,14 +143,13 @@ public class Server {
         if (message.getMode().equalsIgnoreCase("Load")) {
             assert player2 != null;
             pool.execute(player2);
-            //GoGame goGame = this.saveGame(message);
-            //goGame = this.goGameService.getGame();
+
             game.setPlayer1(player1);
             game.setPlayer2(player2);
             game.setActualPlayer(player1);
             game.setGameLogic(new Game_Rules(boardSize));
             game.setHotseat(ifHotseat);
-            //game.setGoGame(goGame);
+
             game.setMovements(this.movementService.getMovementsById(gameId));
             player1.setGame(game);
             player2.setGame(game);

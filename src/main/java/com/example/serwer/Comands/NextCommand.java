@@ -30,8 +30,6 @@ public class NextCommand extends Command {
 
             if (game.getGameLogic().move(movement.getX(), movement.getY(), game.getActualPlayer().getNumber())) {
                 try {
-//                    Movement movement = new Movement("move", message.getX(), message.getY(), goGame.getId(), goGame);
-//                    this.movementService.saveMovement(movement);
 
                     int[][] emptyPlaces = game.getGameLogic().removeDeathStones(movement.getX(), movement.getY());
                     game.getActualPlayer().addPoints(emptyPlaces.length);

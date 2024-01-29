@@ -1,7 +1,10 @@
 package com.example.serwer.MessagefromServer;
 
+import java.io.Serial;
+
 public class NewGame implements Server_ServerMessage
 {
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private int[] gamesIdList;
@@ -10,11 +13,5 @@ public class NewGame implements Server_ServerMessage
         this.gamesIdList = gamesIdList;
     }
 
-    public int[] getGamesIdList() {
-        return gamesIdList;
-    }
 
-    public void setGamesIdList(int[] gamesIdList) {
-        this.gamesIdList = gamesIdList;
-    }
 }

@@ -5,8 +5,8 @@ import com.example.serwer.MariaDb.MovementDAO;
 
 public interface MovementService
 {
-    public void saveMovement(Movement movement);
-    public MovementDAO getMovementDAO();
-    public void setMovementDAO(MovementDAO movementDAO);
-    public Movement[] getMovementsById(int id);
+     void saveMovement(Movement movement);
+     MovementDAO getMovementDAO();
+     void setMovementDAO(MovementDAO movementDAO);
+     Movement[] getMovementsById(int id);
 }

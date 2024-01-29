@@ -1,7 +1,10 @@
 package com.example.serwer.MessagefromServer;
 
+import java.io.Serial;
+
 public class MoveInfo implements Server_ServerMessage
 {
+    @Serial
     private static final long serialVersionUID = 1L;
     private int player;
     private int x;
@@ -21,19 +24,6 @@ public class MoveInfo implements Server_ServerMessage
     public int getPlayer() {
         return this.player;
     }
-
-    public int getX() {
-        return this.x;
-    }
-
-    public int getY() {
-        return this.y;
-    }
-
-    public int[][] getEmptyPlaces() {
-        return this.emptyPlaces;
-    }
-
     public boolean isCorrectMove() {
         return correctMove;
     }
