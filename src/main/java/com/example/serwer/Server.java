@@ -58,6 +58,7 @@ public class Server {
             connection = new ServerConnection(listener);
             TimeUnit.SECONDS.sleep(1);
             connection.sendMessage(new NewGame(this.goGameService.getIdList()));
+
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
@@ -126,9 +127,8 @@ public class Server {
             }
             default ->
             {
-                break;
             }
-
+            // Obsługa nieznanej opcji
         }
 
         ExecutorService pool = Executors.newFixedThreadPool(20);

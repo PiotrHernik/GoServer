@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 public class ChoseCommand implements CommandFactory
 {
     @Autowired
+    public
     ApplicationContext applicationContext;
 
     @Override
