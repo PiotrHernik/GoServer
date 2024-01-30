@@ -50,7 +50,6 @@ public class ServerConnection
         outputStream.writeObject(message);
         outputStream.flush();
 
-        System.out.println("hello");
     }
 
 

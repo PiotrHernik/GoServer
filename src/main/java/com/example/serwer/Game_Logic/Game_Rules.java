@@ -50,7 +50,7 @@ public class Game_Rules
 
     public int[][] removeDeathStones(int x, int y) {
 
-        System.out.println("Jestesmy w deathstones    " + x + "    " + y);
+
         int deathStoneNumber = ((this.board[x][y] == 1) ? 2 : 1);
 
         if (x + 1 < this.size && this.board[x + 1][y] == deathStoneNumber && this.checkBreath(x + 1, y, deathStoneNumber))
@@ -66,13 +66,7 @@ public class Game_Rules
             this.cleanBoardAfterChecking(x, y - 1, -1, deathStoneNumber, deathStoneNumber);
 
         int[][] emptyPlaces = this.getEmptyPlaces();
-        for (int[] emptyPlace : emptyPlaces)
-        {
-            for (int i : emptyPlace)
-            {
-                System.out.println("Empty PLaes :  " + i);
-            }
-        }
+
         if (emptyPlaces.length == 1) {
             this.koX = emptyPlaces[0][0];
             this.koY = emptyPlaces[0][1];

@@ -23,7 +23,7 @@ public class NextCommand extends Command {
 
         Movement movement = game.getNextMovement();
 
-        System.out.println("Tralalaa");
+
         if (movement.getType().contentEquals("move")) {
             if (!game.getActualPlayer().equals(player) && !game.isHotseat())
                 return;

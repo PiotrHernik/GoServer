@@ -128,7 +128,7 @@ public class Server {
             default ->
             {
             }
-            // Obsługa nieznanej opcji
+
         }
 
         ExecutorService pool = Executors.newFixedThreadPool(20);
