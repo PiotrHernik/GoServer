@@ -1,0 +1,16 @@
+Polecenia potrzebne do utworzenia odpowiednich tabel: 
+create table game (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    date date,
+    type VARCHAR(50),
+    size int
+);
+
+create table movements (
+    id int PRIMARY KEY AUTO_INCREMENT,
+    type VARCHAR(50),
+    x int,
+    y int,
+    game_id int,
+    FOREIGN KEY (game_id) REFERENCES game(id)
+);
